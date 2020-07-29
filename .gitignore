@@ -1,0 +1,3 @@
+## git repository에서 제외할 대상을 명시
+
+node_modules
