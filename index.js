@@ -1,30 +1,47 @@
-// express module을 가져옴 
-const express = require('express')
+const express = require('express');
+const app = express();
+const port = 5000;
 
-// 새로운 express 앱 생성 
-const app = express()
+// body-parser를 가져옴 
+const bodyParser = require('body-parser');
 
-// 포트 설정 
-const port = 5000
+// User schema를 가져옴 
+const { User } = require('./models/User');
 
-// mongoose module을 가져옴 
-const mongoose = require('mongoose')
+// application/x-www-form-urlencoded 인코딩
+app.use(bodyParser.urlencoded({extended: true}));
 
-// mongodb cluster와 연결 
+// application/json 인코딩
+app.use(bodyParser.json());
+
+const mongoose = require('mongoose');
+
 mongoose.connect('mongodb+srv://<username>:<password>@testcluster.acybk.mongodb.net/<dbname>?retryWrites=true&w=majority', {
-    // mongodb 버전 업그레이드 시 deprecation warning을 없애기 위함
     useNewUrlParser: true, 
     useUnifiedTopolgy: true, 
     userCreateIndex: true,
     useFindAndModify : false 
-    // mongodb 연결 시 출력 
 }).then(() => console.log('MongoDB Connected...'))
-    // 오류 발생 시 에러를 출력 
-  .catch(err => console.log(err))
+  .catch(err => console.log(err));
 
-// root directory(/) 도달 시 Hello World 출력 
-app.get('/', (req, res) => res.send('Hello World!'))
+app.get('/', (req, res) => res.send('Hello World!'));
 
-// 5000 포트에서 실행 
-// 콘솔(터미널)에 Example app listening at http://localhost:5000 출력 
-app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`))
+app.post('/register', (req, res) => {
+  // 회원 가입시 필요한 정보들을 client에서 받아 데이터베이스에 저장하는 라우터
+
+  // body-parser 설정으로 request의 body를 인코딩해서 사용할 수 있음 
+  const user = new User(req.body)
+
+  // mongodb에 저장 
+  user.save((err, doc) => {
+    // 에러 발생시 
+    if(err) {
+      // response에 json 형태로 success 여부(false)와 에러 전송
+      return res.json({ success: false, err })
+    }
+    // 성공시 json 형태로 success 여부(true) 전송 
+    return res.status(200).json({ success: true })
+  });
+});
+
+app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`));
