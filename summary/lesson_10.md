@@ -1,43 +1,19 @@
-const mongoose = require('mongoose');
+# 10장
 
-// 암호화를 위해 bcrypt를 가져옴
-const bcrypt = require('bcrypt');
+#### 용어
+- bcrypt
+    - Blowfish를 기반으로 만들어진 단방향 암호화 해싱함수 
+    - rainbow table 공격을 막기 위해 salt 사용 
+    - 현재 데이터베이스에 사용자의 비밀번호가 plain text로 저장되어 보안적으로 취약하기 때문에 이를 개선하기 위해 사용
 
-// bcrypt 사용을 위해 saltRounds를 정의
-// salt의 문자 길이 수 의미 
-const saltRounds = 10;
+```sh
+$ npm install bcrypt --save
+```
+- bcrypt 설치 
 
-const userSchema = mongoose.Schema({
-    name: {
-        type: String, 
-        maxlength: 50
-    }, 
-    email: {
-        type: String, 
-        trim: true, 
-        unique: 1
-    }, 
-    password: {
-        type: String,
-        minlength: 5
-    }, 
-    lastname : {
-        type: String, 
-        maxlength: 50
-    }, 
-    role: {
-        type: Number,
-        default: 0 
-    },
-    image: String,
-    token: {
-        type: String
-    }, 
-    tokenExp: {
-        type: Number
-    }
-})
+#### 내용
 
+```sh
 // mongoose 메소드 
 // 지정한 메소드를 실행하기 전에 코드를 실행
 userSchema.pre('save', function( next ) {
@@ -82,7 +58,9 @@ userSchema.pre('save', function( next ) {
     // next();
 
 })
+```
+- bcrypt를 사용하여 암호화를 진행하는 코드 
 
-const User = mongoose.model('User', userSchema)
- 
-module.exports = { User }
+![1](./images/10-1.jpg)
+- testuser : password가 plain text로 그대로 노출되어있음
+- test01 : password가 bcrypt로 인해 암호화되었음 
