@@ -40,6 +40,3 @@ $ npm install nodemon --save-dev
 
 ![2](./images/8-2.jpg)
 - 서버 실행 도중 코드를 변경했을때의 터미널
-
-![3](./images/7-3.jpg)
-- 클러스터에 정상적으로 저장됨 
