@@ -1,11 +1,8 @@
 const mongoose = require('mongoose');
-
-// 암호화를 위해 bcrypt를 가져옴
 const bcrypt = require('bcrypt');
-
-// bcrypt 사용을 위해 saltRounds를 정의
-// salt의 문자 길이 수 의미 
 const saltRounds = 10;
+
+const jwt = require('jsonwebtoken');
 
 const userSchema = mongoose.Schema({
     name: {
@@ -38,51 +35,69 @@ const userSchema = mongoose.Schema({
     }
 })
 
-// mongoose 메소드 
-// 지정한 메소드를 실행하기 전에 코드를 실행
 userSchema.pre('save', function( next ) {
-    // mongoDB save 메소드 실행 이전에 비밀번호를 암호화 
-
-    // index.js의 const user = new User(req.body);로 인해 model에 정보를 입력한 상태
     var user = this; 
 
-    // 비밀번호가 변경될때에만 동작
-    // 비밀번호를 입력하거나 변경할 때에만 암호화가 되어야 하며, 그 외의 경우에는 동작할 필요가 없음 
     if(user.isModified('password')) {
-        // bcrypt 공식문서 참조 
-        // bcrypt.genSalt : salt 생성 
         bcrypt.genSalt(saltRounds, function(err, salt) {
-            // salt 생성 도중 오류 발생 시 오류내용을 가지고 save 메소드 호출 이후의 코드를 실행하도록 지시
             if(err) {
                 return next(err);
             }
 
-            // salt 생성 완료 시 
-            // myPlaintextPassword : 첫 번째 인자, 사용자가 입력한 암호화되기 이전의 비밀번호 
-            // salt : 두 번째 인자, 암호화를 위한 문자열 
-            // hash : callback function 두 번째 인자, 암호화된 비밀번호 
             bcrypt.hash(user.password, salt, function(err, hash) {
                 if(err) {
                     return next(err);
                 }
-                // 암호화된 비밀번호로 변경 
-                user.password = hash;
 
-                // save 메소드 호출 이후의 코드를 실행하도록 지시 
+                user.password = hash;
                 next();
             });
         });
     }
-    // 비밀번호가 아닌 다른 요소를 변경하는 경우 
     else {
         next();
     }
-
-    // 해당 구간에 next()가 있을 경우 비밀번호를 암호화 하기 전에 next() 구문으로 바로 save 메소드를 실행하기 때문에 암호화가 제대로 되지 않음 
-    // next();
-
 })
 
-const User = mongoose.model('User', userSchema)
+// 사용자가 입력한 비밀번호와 mongoDB에 저장된 비밀번호를 비교하는 메소드 
+// plainPassword : 클라이언트에서 입력한 비밀번호 
+// cb : callback function 약어 
+userSchema.methods.comparePassword = function(plainPassword, cb) {
+    // mongoDB에 저장된 암호화된 비밀번호를 복호화할 수 없기 때문에 
+    // plainPassword를 암호화한 뒤 이를 mongoDB에 저장된 암호화된 비밀번호와 비교 
+    bcrypt.compare(plainPassword, this.password, function(err, isMatch) {
+        // 오류 발생 시 오류 내용을 callback function의 매개변수로 반환 
+        if(err) {
+            return cb(err);
+        }
+        // err : null, 오류가 발생하지 않음 
+        // isMatch : 비밀번호 일치여부(true) 
+        cb(null, isMatch);
+    })
+}
+
+// 로그인한 사용자의 토큰을 생성하는 메소드 
+userSchema.methods.generateToken = function(cb) {
+    // 사용자가 입력한 값을 model을 이용해 가져옴 
+    var user = this; 
  
-module.exports = { User }
+    // jsonwebtoken을 이용해서 token을 생성 
+    // user._id와 secretToken을 활용하여 토큰 생성
+    // jwt.sign()의 첫 번째 인자는 plain Object여야하므로 toHexString()으로 변환 
+    // secretToken을 활용하면 user._id를 추출할 수 있으므로 회원식별가능 
+    var token = jwt.sign(user._id.toHexString(), 'secretToken');
+
+    user.token = token;
+
+    // 생성한 토큰을 해당 회원의 레코드에 저장 
+    user.save(function(err, user) {
+        if(err) {
+            return cb(err);
+        }
+        cb(null, user);
+    })
+}
+
+const User = mongoose.model('User', userSchema);
+ 
+module.exports = { User };
