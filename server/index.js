@@ -69,12 +69,8 @@ app.post('/api/users/login', (req, res) => {
   }) 
 })
 
-// auth : request 이후 callback function 호출 전에 어떠한 기능을 수행하는 middleware
 app.get('/api/users/auth', auth, (req, res) => {
-  // middleware auth의 동작이 모두 완료되고 Authentication이 true일 경우 동작 
   res.satus(200).json({
-    // auth.js에서 req.user = user로 요청에 user 정보를 추가했기 때문에 접근 가능 
-    // role이 0이 아닐 경우 관리자 
     _id: req.user._id, 
     isAdmin: req.user.role === 0 ? false : true, 
     isAuth: true, 
@@ -83,6 +79,30 @@ app.get('/api/users/auth', auth, (req, res) => {
     lastname: req.user.lastname, 
     role: req.user.role,
     image: req.user.image
+  })
+})
+
+// 로그아웃 기능은 로그인한 유저만이 사용할 수 있으므로 auth middleware 사용 
+app.get('/api/users/logout', auth, (req, res) => {
+  
+  User.findOneAndUpdate({
+    // find 조건 
+    _id: req.user._id, 
+  },
+  {
+    // update 내용
+    token: ""
+  }, (err, user) => {
+    if(err) {
+      return res.json({
+          success: false, 
+          err
+      });
+    }
+
+    return res.status(200).send({
+      success: true
+    });
   })
 })
 
