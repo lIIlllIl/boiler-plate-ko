@@ -24,6 +24,12 @@ mongoose.connect(config.mongoURI, {
 
 app.get('/', (req, res) => res.send('Hello World!'));
 
+app.get('/api/hello', (req, res) => {
+  res.send(
+    "안녕하세요."
+  );
+})
+
 app.post('/api/users/register', (req, res) => {
 
   const user = new User(req.body);
@@ -82,15 +88,12 @@ app.get('/api/users/auth', auth, (req, res) => {
   })
 })
 
-// 로그아웃 기능은 로그인한 유저만이 사용할 수 있으므로 auth middleware 사용 
 app.get('/api/users/logout', auth, (req, res) => {
   
   User.findOneAndUpdate({
-    // find 조건 
     _id: req.user._id, 
   },
   {
-    // update 내용
     token: ""
   }, (err, user) => {
     if(err) {
