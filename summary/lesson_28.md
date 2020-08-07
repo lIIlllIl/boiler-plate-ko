@@ -44,7 +44,7 @@ export default function Hello {
 - 성능면에서 빨라진다
 
 - react component life cycle 
-![1](./images/28-1.png)
+![1](./images/28-1.jpg)
 - Mount category 
     - DOM이 생성되고 웹 브라우저 상에 나타나는 것 
     - 실행 순서
