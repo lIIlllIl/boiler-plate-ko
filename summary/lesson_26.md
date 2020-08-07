@@ -14,7 +14,7 @@
     - 컴포넌트 안에서 state의 값을 변경할 수 있음(mutable)
     - 값 변경 시 re-rendering 된다는 특징을 가지고 있음
 
-![1](./images/26-1.jpg)
+![1](./images/26-1.png)
 - Redux Life Cycle 
 - 한 방향으로만 흐름
 - Actions : 상태를 알려주는 객체
