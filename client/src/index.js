@@ -14,16 +14,18 @@ import { applyMiddleware, createStore } from 'redux';
 import promiseMiddleware from 'redux-promise';
 import ReduxThunk from 'redux-thunk';
 
-// redux store가 function과 promise도 인식할 수 있도록 middleware를 가져와서 redux store를 생성
-const createStoreWithMiddleware = applyMiddleware(promiseMiddleware, ReduxThunk)(createStore);
-
 // Reducer 사용을 위해 가져옴 
 import Reducer from './_reducers';
+
+// redux store가 function과 promise도 인식할 수 있도록 middleware를 가져와서 redux store를 생성
+const createStoreWithMiddleware = applyMiddleware(promiseMiddleware, ReduxThunk)(createStore);
 
 ReactDOM.render(
   <Provider
     store={createStoreWithMiddleware(Reducer, 
-        
+        // Redux Extension 연동
+        window.__REDUX_DEVTOOLS_EXTENSION__ &&
+        window.__REDUX_DEVTOOLS_EXTENSION__()
     )}
   >
     <App />
