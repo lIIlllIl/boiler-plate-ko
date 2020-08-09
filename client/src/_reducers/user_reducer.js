@@ -1,7 +1,8 @@
 // reducer로 반환할 type을 types.js에서 가져옴 
 
 import {
-    LOGIN_USER
+    LOGIN_USER, 
+    REGISTER_USER
 } from '../_actions/types';
 
 // state : 이전 state 
@@ -16,7 +17,11 @@ export default function(state = {}, action) {
             // action.playload = 서버(node.js)의 로그인 라우터에서 반환한 response { loginSuccess: true, userId: user._id }를 loginSuccess에 저장 
             return { ...state, loginSuccess : action.payload }
             break;
+        case REGISTER_USER : 
+            return { ...state, register : action.payload }
+            break;
         default:
             return state;
     }
 }
+

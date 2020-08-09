@@ -1,12 +1,6 @@
-// react에서 state 관리를 위해 useState를 가져옴 
-import React, { useState } from 'react';
-
-// redux를 사용하기 위해 useDispatch를 가져옴 
-import { useDispatch } from 'react-redux';
-
-//  registerUser reducer를 가져옴 
-import { registerUser } from '../../../_actions/user_action';
-
+# 31장
+#### 내용
+```sh
 function RegisterPage(props) {
     const dispatch = useDispatch();
 
@@ -111,3 +105,53 @@ function RegisterPage(props) {
 }
 
 export default RegisterPage;
+```
+- /client/src/components/views/RegisterPage.js
+
+```sh
+// reducer로 반환할 type을 types.js에서 가져옴 
+
+import {
+    LOGIN_USER, 
+    REGISTER_USER
+} from '../_actions/types';
+
+// state : 이전 state 
+// action : state를 처리하는 action 
+export default function(state = {}, action) {
+    // 각 라우터에 따른 다양한 type이 오기 때문에 switch문으로 처리
+    // action에서 데이터를 조작한 뒤 return으로 어떠한 기능을 수행했는지 명시하는 type과 수행 결과인 request를 reducer에 return하므로 action.type로 접근 
+    switch (action.type) {
+        case LOGIN_USER :
+            // ...state : predleOperator로 이전 state를 그대로 가져옴 
+            // 이전 state는 빈( {} ) 상태
+            // action.playload = 서버(node.js)의 로그인 라우터에서 반환한 response { loginSuccess: true, userId: user._id }를 loginSuccess에 저장 
+            return { ...state, loginSuccess : action.payload }
+            break;
+        case REGISTER_USER : 
+            return { ...state, register : action.payload }
+            break;
+        default:
+            return state;
+    }
+}
+
+```
+- /client/src/_reducers/user_reducer.js
+
+```sh
+// axios를 통해 server와 통신하는 역할을 담당하는 action 
+// dataToSubmit : body를 통해 전달한 email, password, name, confirm password  
+export function registerUser(dataToSubmit) {
+    // 서버의 로그인 라우터의 반환값(response.data)를 request에 저장 
+    const request = Axios.post('/api/users/register', dataToSubmit)
+                         .then(response => response.data)
+
+    // action에서 다룬 데이터를 Reducer로 반환(전달)                 
+    return {
+        type : REGISTER_USER,
+        payload : request
+    }
+}
+```
+- /client/src/_actions/user_action.js
