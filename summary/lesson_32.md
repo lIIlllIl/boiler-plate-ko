@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react'
-import axios from 'axios';
-
+# 32장
+#### 내용
+```sh
 function LandingPage(props) {
     /*
     useEffect(() => {
@@ -41,5 +41,8 @@ function LandingPage(props) {
         </div>
     )
 }
+```
+- /client/src/components/views/LadingPage/LandingPage.js
 
-export default LandingPage;
+![1](./images/32-1.jpg)
+- 로그아웃 시 response data 
