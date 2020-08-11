@@ -9,7 +9,7 @@
 - [2장](https://github.com/lIIlllIl/boiler-plate-ko/blob/master/summary/lesson_2.md)
     - node.js와 express 
 - [3장](https://github.com/lIIlllIl/boiler-plate-ko/blob/master/summary/lesson_3.md)
-    - mongoDB Cluster 연결[mongodb](https://www.mongodb.com/)
+    - mongoDB Cluster 연결 - [mongodb](https://www.mongodb.com/)
 - [4장](https://github.com/lIIlllIl/boiler-plate-ko/blob/master/summary/lesson_4.md)
     - mongoDB model & schema 
 - [5장](https://github.com/lIIlllIl/boiler-plate-ko/blob/master/summary/lesson_5.md)
