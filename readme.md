@@ -7,32 +7,62 @@
 - [1장](https://github.com/lIIlllIl/boiler-plate-ko/blob/master/summary/lesson_1.md) 
     - 소개
 - [2장](https://github.com/lIIlllIl/boiler-plate-ko/blob/master/summary/lesson_2.md)
+    - node.js와 express 
 - [3장](https://github.com/lIIlllIl/boiler-plate-ko/blob/master/summary/lesson_3.md)
+    - mongoDB Cluster 연결[mongodb](https://www.mongodb.com/)
 - [4장](https://github.com/lIIlllIl/boiler-plate-ko/blob/master/summary/lesson_4.md)
+    - mongoDB model & schema 
 - [5장](https://github.com/lIIlllIl/boiler-plate-ko/blob/master/summary/lesson_5.md)
+    - git 
 - [6장](https://github.com/lIIlllIl/boiler-plate-ko/blob/master/summary/lesson_6.md)
+    - SSH를 이용한 github 연결 
 - [7장](https://github.com/lIIlllIl/boiler-plate-ko/blob/master/summary/lesson_7.md)
+    - BodyParser & PostMan & 회원 가입 기능 
 - [8장](https://github.com/lIIlllIl/boiler-plate-ko/blob/master/summary/lesson_8.md)
+     - nodemon 
 - [9장](https://github.com/lIIlllIl/boiler-plate-ko/blob/master/summary/lesson_9.md)
+    - .gitignore을 이용한 정보관리 
 - [10장](https://github.com/lIIlllIl/boiler-plate-ko/blob/master/summary/lesson_10.md)
+    - Bcrypt & 로그인 기능 
 - [11장 & 12장](https://github.com/lIIlllIl/boiler-plate-ko/blob/master/summary/lesson_11&12.md)
+    - jsonwebtoken을 이용한 token 생성 & 인증 기능 
 - [13장](https://github.com/lIIlllIl/boiler-plate-ko/blob/master/summary/lesson_13.md)
+    - 로그아웃 기능 
 - [14장](https://github.com/lIIlllIl/boiler-plate-ko/blob/master/summary/lesson_14.md)
+***
 - [15장](https://github.com/lIIlllIl/boiler-plate-ko/blob/master/summary/lesson_15.md)
+    - react 
 - [16장](https://github.com/lIIlllIl/boiler-plate-ko/blob/master/summary/lesson_16.md)
+    - create-react-app(CRA) 
 - [17장](https://github.com/lIIlllIl/boiler-plate-ko/blob/master/summary/lesson_17.md)
+    - npm & npx 
 - [18장](https://github.com/lIIlllIl/boiler-plate-ko/blob/master/summary/lesson_18.md)
+    - create-react-app 구조 
 - [19장](https://github.com/lIIlllIl/boiler-plate-ko/blob/master/summary/lesson_19.md)
+    - 현재 프로젝트에서 사용할 boiler-plate의 구조 
 - [20장](https://github.com/lIIlllIl/boiler-plate-ko/blob/master/summary/lesson_20.md)
+    - react-router-dom 
 - [21장](https://github.com/lIIlllIl/boiler-plate-ko/blob/master/summary/lesson_21.md)
+    - Axios & useEffect & CORS 문제 발생
 - [22장](https://github.com/lIIlllIl/boiler-plate-ko/blob/master/summary/lesson_22.md)
+    - CORS & Proxy설정
 - [23장](https://github.com/lIIlllIl/boiler-plate-ko/blob/master/summary/lesson_23.md)
+    - Proxy 
 - [24장](https://github.com/lIIlllIl/boiler-plate-ko/blob/master/summary/lesson_24.md)
+    - Concurrently 
 - [25장](https://github.com/lIIlllIl/boiler-plate-ko/blob/master/summary/lesson_25.md)
+    - Ant CSS Framework 
 - [26장](https://github.com/lIIlllIl/boiler-plate-ko/blob/master/summary/lesson_26.md)
+    - Redux & Redux Life Cycle 
 - [27장](https://github.com/lIIlllIl/boiler-plate-ko/blob/master/summary/lesson_27.md)
+    - Redux Middleware 
 - [28장](https://github.com/lIIlllIl/boiler-plate-ko/blob/master/summary/lesson_28.md)
+    - React Hooks 
 - [29장 & 30장](https://github.com/lIIlllIl/boiler-plate-ko/blob/master/summary/lesson_29&30.md)
+    - 로그인 페이지(LoginPage) 
 - [31장](https://github.com/lIIlllIl/boiler-plate-ko/blob/master/summary/lesson_31.md)
+    - 회원가입 페이지(RegisterPage)
 - [32장](https://github.com/lIIlllIl/boiler-plate-ko/blob/master/summary/lesson_32.md)
+    - 로그아웃 기능 
 - [33장 & 34장](https://github.com/lIIlllIl/boiler-plate-ko/blob/master/summary/lesson_33&34.md)
+    - 인증 검사
