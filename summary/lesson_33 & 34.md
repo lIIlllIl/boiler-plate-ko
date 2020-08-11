@@ -75,11 +75,6 @@ export default function(SpecificComponent, option, adminRoute = null) {
 }
 ```
 - /client/src/hoc/auth.js
-
-```sh
-
-```
-- /client/src/components/views/LadingPage/LandingPage.js
  
 ```sh
 // HOC에 모든 component를 감싸주기 위해 가져옴 
