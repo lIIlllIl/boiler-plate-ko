@@ -7,6 +7,9 @@ import { useDispatch } from 'react-redux';
 // loginUser reducer를 가져옴 
 import { loginUser } from '../../../_actions/user_action';
 
+// props.history가 undefined가 되지 않도록 router로 감싸줌 
+import { withRouter } from 'react-router-dom';
+
 function LoginPage(props) {
     // redux의 action을 생성하기 위해 dispatch를 생성 
     const dispatch = useDispatch();
@@ -80,4 +83,4 @@ function LoginPage(props) {
     )
 }
 
-export default LoginPage;
+export default withRouter(LoginPage);

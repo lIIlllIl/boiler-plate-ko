@@ -1,14 +1,12 @@
 import React, { useEffect } from 'react'
 import axios from 'axios';
 
-function LandingPage(props) {
-    /*
-    useEffect(() => {
-        axios.get('/api/hello')
-             .then(response => console.log(response.data));
-    }, []);
-    */
+// props.history가 undefined가 되지 않도록 router로 감싸줌 
+import { withRouter } from 'react-router-dom';
 
+import { useDispatch } from 'react-redux';
+
+function LandingPage(props) {
     // logout handler 
     const onClickHandler = () => {
         // 추가적인 작업이 필요하지 않으므로 곧장 axios를 통해 get방식으로 server에 로그아웃 요청 
@@ -24,7 +22,8 @@ function LandingPage(props) {
                  }
                  console.log(response.data);
              })
-    }
+    };
+    const dispatch = useDispatch();
 
     return (
         <div style={{
@@ -32,9 +31,7 @@ function LandingPage(props) {
             , width: '100%', height: '100vh'
         }}>
             <h2>시작 페이지</h2>
-
             <br/>
-
             <button onClick={onClickHandler} >
                 로그아웃
             </button>
@@ -42,4 +39,4 @@ function LandingPage(props) {
     )
 }
 
-export default LandingPage;
+export default withRouter(LandingPage);

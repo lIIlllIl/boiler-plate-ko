@@ -7,6 +7,9 @@ import { useDispatch } from 'react-redux';
 //  registerUser reducer를 가져옴 
 import { registerUser } from '../../../_actions/user_action';
 
+// props.history가 undefined가 되지 않도록 router로 감싸줌 
+import { withRouter } from 'react-router-dom';
+
 function RegisterPage(props) {
     const dispatch = useDispatch();
 
@@ -71,8 +74,7 @@ function RegisterPage(props) {
             .then(response => {
                 if(response.payload.success) {
                     // 페이지 이동
-                    alert(props.history);
-                    // props.history.push('/');
+                    props.history.push('/');
                 }
                 else {
                     alert('Failed to Sign Up');
@@ -110,4 +112,4 @@ function RegisterPage(props) {
     )
 }
 
-export default RegisterPage;
+export default withRouter(RegisterPage);

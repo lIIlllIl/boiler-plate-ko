@@ -2,7 +2,8 @@
 
 import {
     LOGIN_USER, 
-    REGISTER_USER
+    REGISTER_USER,
+    AUTH_USER
 } from '../_actions/types';
 
 // state : 이전 state 
@@ -19,6 +20,10 @@ export default function(state = {}, action) {
             break;
         case REGISTER_USER : 
             return { ...state, register : action.payload }
+            break;
+        case AUTH_USER :
+            // /api/users/auth에서 유저의 모든 정보를 반환하며 이름은 userData로 지정 
+            return { ...state, userData : action.payload }
             break;
         default:
             return state;
