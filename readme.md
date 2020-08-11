@@ -65,4 +65,4 @@
 - [32장](https://github.com/lIIlllIl/boiler-plate-ko/blob/master/summary/lesson_32.md)
     - 로그아웃 기능 
 - [33장 & 34장](https://github.com/lIIlllIl/boiler-plate-ko/blob/master/summary/lesson_33&34.md)
-    - 인증 검사
+    - 인증 검사   
